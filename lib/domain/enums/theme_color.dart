@@ -1,0 +1,4 @@
+enum ThemeColor {
+  purple,
+  blue,
+}

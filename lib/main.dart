@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:my_customs_v2/components/main_bar.dart';
-import 'package:my_customs_v2/database/db.dart';
-import 'package:my_customs_v2/providers/image_path_provider.dart';
-import 'package:my_customs_v2/providers/purchase_provider.dart';
-import 'package:my_customs_v2/providers/sort_order_provider.dart';
+import 'package:my_customs_v2/data/repository/theme_repository.dart';
+import 'package:my_customs_v2/data/storage/theme/theme_storage.dart';
+import 'package:my_customs_v2/presentation/components/main_bar.dart';
+import 'package:my_customs_v2/data/storage/database/db.dart';
+import 'package:my_customs_v2/presentation/providers/image_path_provider.dart';
+import 'package:my_customs_v2/presentation/providers/purchase_provider.dart';
+import 'package:my_customs_v2/presentation/providers/sort_order_provider.dart';
+import 'package:my_customs_v2/presentation/providers/theme_controller.dart';
+import 'package:my_customs_v2/presentation/uikit/theme/app_theme_data.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +19,12 @@ void main() async {
 
   final appDir = await getApplicationDocumentsDirectory();
 
+  final prefs = await SharedPreferences.getInstance();
+
+  final themeStorage = ThemeStorage(prefs: prefs);
+
+  final themeRepository = ThemeRepository(themeStorage: themeStorage);
+
   runApp(
     MultiProvider(
       providers: [
@@ -21,6 +32,11 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) => ImagePathProvider(
             appDirPath: appDir.path,
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ThemeController(
+            themeRepository: themeRepository,
           ),
         ),
         ChangeNotifierProvider(create: (context) => SortOrderProvider()),
@@ -38,9 +54,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      // theme: AppThemeData.purpleLightTheme,
+      // darkTheme: AppThemeData.purpleDarkTheme,
+      theme: AppThemeData.blueLightTheme,
+      darkTheme: AppThemeData.blueDarkTheme,
+      themeMode: context.watch<ThemeController>().themeMode,
       home: const MainBar(),
     );
   }
