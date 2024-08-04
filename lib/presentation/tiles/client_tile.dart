@@ -49,7 +49,13 @@ class ClientTile extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: context.colorScheme.primary,
+                // color: context.colorScheme.primary,
+                gradient: LinearGradient(
+                  colors: [
+                    context.colorScheme.primary,
+                    context.colorScheme.onPrimary,
+                  ],
+                ),
                 borderRadius: BorderRadius.circular(8),
               ),
               padding: const EdgeInsets.all(12),

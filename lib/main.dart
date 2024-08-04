@@ -7,7 +7,6 @@ import 'package:my_customs_v2/presentation/providers/image_path_provider.dart';
 import 'package:my_customs_v2/presentation/providers/purchase_provider.dart';
 import 'package:my_customs_v2/presentation/providers/sort_order_provider.dart';
 import 'package:my_customs_v2/presentation/providers/theme_controller.dart';
-import 'package:my_customs_v2/presentation/uikit/theme/app_theme_data.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,11 +53,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // theme: AppThemeData.purpleLightTheme,
-      // darkTheme: AppThemeData.purpleDarkTheme,
-      theme: AppThemeData.blueLightTheme,
-      darkTheme: AppThemeData.blueDarkTheme,
-      themeMode: context.watch<ThemeController>().themeMode,
+      theme: context.watch<ThemeController>().themeData,
       home: const MainBar(),
     );
   }

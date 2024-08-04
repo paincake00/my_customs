@@ -22,6 +22,27 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         textForm = BlueColorPalette.textForm,
         buttonFront = BlueColorPalette.buttonFront;
 
+  AppColorScheme.green()
+      : lightMainColor = GreenColorPalette.lightMainColor,
+        mainColor = GreenColorPalette.mainColor,
+        buttonBack = GreenColorPalette.buttonBack,
+        textForm = GreenColorPalette.textForm,
+        buttonFront = GreenColorPalette.buttonFront;
+
+  AppColorScheme.orange()
+      : lightMainColor = OrangeColorPalette.lightMainColor,
+        mainColor = OrangeColorPalette.mainColor,
+        buttonBack = OrangeColorPalette.buttonBack,
+        textForm = OrangeColorPalette.textForm,
+        buttonFront = OrangeColorPalette.buttonFront;
+
+  AppColorScheme.redSky()
+      : lightMainColor = RedSkyColorPalette.lightMainColor,
+        mainColor = RedSkyColorPalette.mainColor,
+        buttonBack = RedSkyColorPalette.buttonBack,
+        textForm = RedSkyColorPalette.textForm,
+        buttonFront = RedSkyColorPalette.buttonFront;
+
   const AppColorScheme._({
     required this.lightMainColor,
     required this.mainColor,

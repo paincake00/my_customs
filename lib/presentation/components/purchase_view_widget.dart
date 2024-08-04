@@ -48,10 +48,11 @@ class PurchaseViewWidget extends StatelessWidget {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
             child: Divider(
               thickness: 1,
+              color: context.colorScheme.secondary,
             ),
           ),
           Align(

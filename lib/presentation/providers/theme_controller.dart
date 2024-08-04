@@ -17,35 +17,52 @@ class ThemeController with ChangeNotifier {
 
   bool get isDarkMode => _themeMode == ThemeMode.dark;
 
-  // ThemeColor _themeColor = ThemeColor.purple;
+  late ThemeColor _themeColor =
+      _themeRepository.getThemeColor() ?? ThemeColor.purple;
 
-  // void setThemeColor(ThemeColor color) {
-  //   _themeColor = color;
-  //   notifyListeners();
-  // }
+  void setThemeColor(ThemeColor color) {
+    _themeColor = color;
 
-  // ThemeData _themeData = AppThemeData.purpleLightTheme;
+    setTheme();
+  }
 
-  // ThemeData get themeData => setTheme();
+  late ThemeData _themeData = getThemeData();
 
-  // ThemeData setTheme() {
-  //   switch (_themeColor) {
-  //     case ThemeColor.purple:
-  //       return _themeMode == ThemeMode.light
-  //           ? AppThemeData.purpleLightTheme
-  //           : AppThemeData.purpleDarkTheme;
-  //     case ThemeColor.blue:
-  //       return _themeMode == ThemeMode.light
-  //           ? AppThemeData.blueLightTheme
-  //           : AppThemeData.blueDarkTheme;
-  //   }
-  // }
+  ThemeData get themeData => _themeData;
+
+  ThemeData getThemeData() {
+    return switch (_themeColor) {
+      ThemeColor.purple => _themeMode == ThemeMode.light
+          ? AppThemeData.purpleLightTheme
+          : AppThemeData.purpleDarkTheme,
+      ThemeColor.blue => _themeMode == ThemeMode.light
+          ? AppThemeData.blueLightTheme
+          : AppThemeData.blueDarkTheme,
+      ThemeColor.green => _themeMode == ThemeMode.light
+          ? AppThemeData.greenLightTheme
+          : AppThemeData.greenDarkTheme,
+      ThemeColor.orange => _themeMode == ThemeMode.light
+          ? AppThemeData.orangeLightTheme
+          : AppThemeData.orangeDarkTheme,
+      ThemeColor.redSky => _themeMode == ThemeMode.light
+          ? AppThemeData.redSkyLightTheme
+          : AppThemeData.redSkyDarkTheme,
+    };
+  }
+
+  Future<void> setTheme() async {
+    await _themeRepository.setThemeColor(color: _themeColor);
+    _themeData = getThemeData();
+
+    notifyListeners();
+  }
 
   Future<void> setThemeMode(ThemeMode mode) async {
     if (mode == _themeMode) return;
     await _themeRepository.setThemeMode(mode: mode);
     _themeMode = mode;
-    notifyListeners();
+
+    setTheme();
   }
 
   Future<void> toggleThemeMode() async {

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_customs_v2/domain/enums/theme_color.dart';
 import 'package:my_customs_v2/presentation/components/archived_purchase.dart';
+import 'package:my_customs_v2/presentation/components/theme_color_button.dart';
 import 'package:my_customs_v2/presentation/providers/theme_controller.dart';
+import 'package:my_customs_v2/presentation/uikit/colors/color_palette.dart';
 import 'package:my_customs_v2/presentation/uikit/theme/context_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -54,7 +57,48 @@ class SettingsPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ThemeColorButton(
+                    color: PurpleColorPalette.lightMainColor,
+                    onPressed: () => context
+                        .read<ThemeController>()
+                        .setThemeColor(ThemeColor.purple),
+                  ),
+                  ThemeColorButton(
+                    color: BlueColorPalette.lightMainColor,
+                    onPressed: () => context
+                        .read<ThemeController>()
+                        .setThemeColor(ThemeColor.blue),
+                  ),
+                  ThemeColorButton(
+                    color: GreenColorPalette.lightMainColor,
+                    onPressed: () => context
+                        .read<ThemeController>()
+                        .setThemeColor(ThemeColor.green),
+                  ),
+                  ThemeColorButton(
+                    color: OrangeColorPalette.lightMainColor,
+                    onPressed: () => context
+                        .read<ThemeController>()
+                        .setThemeColor(ThemeColor.orange),
+                  ),
+                  ThemeColorButton(
+                    // color: RedSkyColorPalette.lightMainColor,
+                    gradient: const LinearGradient(colors: [
+                      RedSkyColorPalette.lightMainColor,
+                      RedSkyColorPalette.mainColor,
+                    ]),
+                    onPressed: () => context
+                        .read<ThemeController>()
+                        .setThemeColor(ThemeColor.redSky),
+                  ),
+                ],
+              ),
+            ),
             GestureDetector(
               onTap: () {
                 Navigator.push(

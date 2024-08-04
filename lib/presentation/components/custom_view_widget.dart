@@ -14,7 +14,13 @@ class CustomViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: context.colorScheme.primary,
+        // color: context.colorScheme.primary,
+        gradient: LinearGradient(
+          colors: [
+            context.colorScheme.primary,
+            context.colorScheme.onPrimary,
+          ],
+        ),
         borderRadius: BorderRadius.circular(8),
       ),
       padding: const EdgeInsets.all(12),
@@ -48,10 +54,11 @@ class CustomViewWidget extends StatelessWidget {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
             child: Divider(
               thickness: 1,
+              color: context.colorScheme.secondary,
             ),
           ),
           Align(
